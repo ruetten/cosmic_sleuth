@@ -38,7 +38,7 @@ git checkout main
 git push 
 ```
 
-2. You can also try to merge branches with the following command:
+2. You can also try to merge branches with the following command. It merges the branch you're currently on with the branch named after `git merge`
 
 ```
 git branch
