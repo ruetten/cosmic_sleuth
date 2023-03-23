@@ -7,10 +7,10 @@ from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import LogisticRegression
 from sklearn.linear_model import Perceptron
 
-import tensorflow as tf
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
-from tensorflow.keras.utils import to_categorical
+# import tensorflow as tf
+# from tensorflow.keras.models import Sequential
+# from tensorflow.keras.layers import Dense
+# from tensorflow.keras.utils import to_categorical
 
 #from google.colab import drive
 
@@ -39,24 +39,24 @@ def eval_classifier(clf, X_train, X_test, y_train, y_test):
 
     print(clf.score(X_test, y_test))
 
-def mlp():
-    # Create the model
-    model = Sequential()
-    model.add(Dense(6, input_dim = 6, activation='relu'))
-    model.add(Dense(5, activation='relu'))
-    model.add(Dense(4, activation='softmax'))
-    model.compile(loss='categorical_crossentropy', optimizer='sgd', metrics=['accuracy'])
-    return model
-
-def eval_mlp(model, X_train, X_test, y_train, y_test):
-    # Convert target classes to categorical ones
-    Y_train = to_categorical(y_train)
-    Y_test = to_categorical(y_test)
-
-    model.fit(X_train, Y_train, epochs=10, batch_size=45, verbose=1)
-    # Test the model after training
-    test_results = model.evaluate(X_test, Y_test, verbose=1)
-    print(f'Test results - Loss: {test_results[0]} - Accuracy: {test_results[1]}%')
+# def mlp():
+#     # Create the model
+#     model = Sequential()
+#     model.add(Dense(6, input_dim = 6, activation='relu'))
+#     model.add(Dense(5, activation='relu'))
+#     model.add(Dense(4, activation='softmax'))
+#     model.compile(loss='categorical_crossentropy', optimizer='sgd', metrics=['accuracy'])
+#     return model
+#
+# def eval_mlp(model, X_train, X_test, y_train, y_test):
+#     # Convert target classes to categorical ones
+#     Y_train = to_categorical(y_train)
+#     Y_test = to_categorical(y_test)
+#
+#     model.fit(X_train, Y_train, epochs=10, batch_size=45, verbose=1)
+#     # Test the model after training
+#     test_results = model.evaluate(X_test, Y_test, verbose=1)
+#     print(f'Test results - Loss: {test_results[0]} - Accuracy: {test_results[1]}%')
 
 def main():
     X, y = read_in_data()
@@ -82,6 +82,6 @@ def main():
     print('Perceptron Class.:', end='\t')
     eval_classifier(Perceptron(), X_train, X_test, y_train, y_test)
 
-    eval_mlp(mlp(), X_train, X_test, y_train, y_test)
+    # eval_mlp(mlp(), X_train, X_test, y_train, y_test)
 
 main()
