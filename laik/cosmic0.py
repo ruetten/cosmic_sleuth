@@ -12,18 +12,18 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.utils import to_categorical
 
-from google.colab import drive
+#from google.colab import drive
 
 # File input
 def read_in_data():
-    drive.mount('/content/drive')
-    with open('/content/drive/My Drive/Colab Notebooks/cosmic_sleuth/data/all_data.txt', 'r') as f:
+    path = './data/training_data/all_data.txt'
+    #path = '/content/drive/My Drive/Colab Notebooks/cosmic_sleuth/data/all_data.txt'
+    #drive.mount('/content/drive')
+    with open(path, 'r') as f:
       temp = np.genfromtxt(f,delimiter=' ')
 
     X = temp[:, :-3]
     y = temp[:, -3:]
-
-    print(X.shape)
 
     return X, y
 
