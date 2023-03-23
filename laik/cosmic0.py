@@ -7,17 +7,23 @@ from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import LogisticRegression
 from sklearn.linear_model import Perceptron
 
-# import tensorflow as tf
-# from tensorflow.keras.models import Sequential
-# from tensorflow.keras.layers import Dense
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.utils import to_categorical
+
+from google.colab import drive
 
 # File input
 def read_in_data():
-    with open('./data/training_data/all_data.txt', 'r') as f:
+    drive.mount('/content/drive')
+    with open('/content/drive/My Drive/Colab Notebooks/cosmic_sleuth/data/all_data.txt', 'r') as f:
       temp = np.genfromtxt(f,delimiter=' ')
 
     X = temp[:, :-3]
     y = temp[:, -3:]
+
+    print(X.shape)
 
     return X, y
 
@@ -33,14 +39,14 @@ def eval_classifier(clf, X_train, X_test, y_train, y_test):
 
     print(clf.score(X_test, y_test))
 
-# def mlp():
-#     # Create the model
-#     model = Sequential()
-#     model.add(Dense(350, input_dim = 784, activation='relu'))
-#     model.add(Dense(50, activation='relu'))
-#     model.add(Dense(10, activation='softmax'))
-#     model.compile(loss='categorical_crossentropy', optimizer='sgd', metrics=['accuracy'])
-#     return model
+def mlp():
+    # Create the model
+    model = Sequential()
+    model.add(Dense(6, input_dim = 6, activation='relu'))
+    model.add(Dense(5, activation='relu'))
+    model.add(Dense(4, activation='softmax'))
+    model.compile(loss='categorical_crossentropy', optimizer='sgd', metrics=['accuracy'])
+    return model
 
 def eval_mlp(model, X_train, X_test, y_train, y_test):
     # Convert target classes to categorical ones
@@ -76,6 +82,6 @@ def main():
     print('Perceptron Class.:', end='\t')
     eval_classifier(Perceptron(), X_train, X_test, y_train, y_test)
 
-    #eval_mlp(mlp(), X_train, X_test, y_train, y_test)
+    eval_mlp(mlp(), X_train, X_test, y_train, y_test)
 
 main()
